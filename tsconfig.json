@@ -2,12 +2,15 @@
   "compilerOptions": {
     "module": "commonjs",
     "esModuleInterop": true,
+    "declaration": true,
     "allowSyntheticDefaultImports": true,
     "target": "es6",
+    "types": ["node"],
     "noImplicitAny": true,
+    "noUnusedLocals": false,
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "dist/esm",
     "baseUrl": "./src",
     "paths": {
       "*": ["node_modules/*", "types/*"]
