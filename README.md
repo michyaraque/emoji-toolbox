@@ -12,6 +12,14 @@ yarn add emoji-toolbox
 ```
 Once you have it installed, you can use it in your code like this:
 
+#### ES6
+```js
+const Emoji = require('emoji-toolbox');
+
+const emojiSoftColor = new Emoji("✅").emojiData;
+```
+
+#### Typescript
 ```typescript
 import Emoji from 'emoji-toolbox';
 

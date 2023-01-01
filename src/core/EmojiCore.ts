@@ -1,13 +1,11 @@
 import { Canvas, createCanvas, SKRSContext2D } from "@napi-rs/canvas";
-import EmojiUtils from "./EmojiUtils";
 import { EmojiAccepted } from "../types/emojiTypes";
-import { canvasRGBAToHex, canvasRGBAToRGB, brightness, saturation, rgbToHex, getEmojiNameByEmoji } from "../utils";
+import { canvasRGBAToHex, canvasRGBAToRGB, brightness, saturation, rgbToHex } from "../utils";
 import fs from 'fs';
 import path from 'path';
+import { EmojiUtils } from "./EmojiUtils";
 
-const root = process.cwd();
-
-class EmojiCore extends EmojiUtils {
+export class EmojiCore extends EmojiUtils {
 
     protected baseColor: number[];
     public emojiData: { [key: string]: any };
@@ -34,8 +32,8 @@ class EmojiCore extends EmojiUtils {
         })
         content += '];';
         await fs.promises.writeFile(path.join(
-            root,
-            'src',
+            __dirname,
+            '..',
             'constants',
             'staticEmojiBase.ts'
         ), content);
@@ -46,8 +44,8 @@ class EmojiCore extends EmojiUtils {
             const formatedEmojis = Object.values(this.getEmojiList());
             let content = 'export type EmojiAccepted = ' + formatedEmojis.map((item) => `"${item}"`).join(" | ");
             await fs.promises.writeFile(path.join(
-                root,
-                'src',
+                __dirname,
+                '..',
                 'types',
                 'emojiTypes.ts'
             ), content);
@@ -127,7 +125,7 @@ class EmojiCore extends EmojiUtils {
 
         this.emojiData = {
             emoji: this._emoji,
-            emoji_name: getEmojiNameByEmoji(this._emoji),
+            emoji_name: this.getEmojiNameByEmoji(this._emoji),
             unicode: [...this._emoji].map(e => e.codePointAt(0).toString(16)).join(`-`),
             styles: {
                 base: {
@@ -159,5 +157,3 @@ class EmojiCore extends EmojiUtils {
         return this;
     }
 }
-
-export default EmojiCore;

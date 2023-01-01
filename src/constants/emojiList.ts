@@ -1,4 +1,7 @@
-{
+type TMoji = {
+    [key: string]: string;
+}
+const EMOJI_LIST: TMoji = {
     "100": "💯",
     "1234": "🔢",
     "umbrella_with_rain_drops": "☔",
@@ -1903,4 +1906,6 @@
     "regional_indicator_x": "�",
     "regional_indicator_y": "�",
     "regional_indicator_z": "�"
-    }
+}
+
+export default EMOJI_LIST;

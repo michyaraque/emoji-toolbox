@@ -1,18 +1,32 @@
 {
   "name": "emoji-toolbox",
+  "description": "A emoji toolbox that can help you to create a amazing UIs based on emoji styles.",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "Apache-2.0 License",
+  "license": "Apache-2.0",
   "author": "Michael Araque",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michyaraque/emoji-toolbox.git"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
-    "build": "tsc",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts",
+    "build": "rimraf dist && npm run build:esm && npm run build:cjs && npm run copyfiles",
+    "copyfiles": "copyfiles --flat ./src/constants/emoji-list.json ./dist/cjs/constants",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
     "start": "node dist/index.js"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
     "@types/typescript": "^2.0.0",
+    "copyfiles": "^2.4.1",
     "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   },

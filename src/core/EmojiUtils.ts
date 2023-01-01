@@ -1,19 +1,13 @@
-import fs from 'fs';
-import path from 'path';
+import {EMOJI_LIST} from './../constants';
 
-const root = process.cwd();
+export class EmojiUtils {
 
-class EmojiUtils {
-
+    protected getEmojiList() {
+        return EMOJI_LIST;
+    }
+    
     protected getKeyByValue(object: any, value: string) {
         return Object.keys(object).find(key => object[key] === value);
-    }
-
-    protected getEmojiList(): string {
-        const emojis = fs.readFileSync(
-            path.join(root, 'src', 'constants', 'emoji-list.json')
-        );
-        return JSON.parse(emojis as any);
     }
 
     getEmojiNameByEmoji(emoji: string): string {
@@ -31,5 +25,3 @@ class EmojiUtils {
     }
 
 }
-
-export default EmojiUtils;

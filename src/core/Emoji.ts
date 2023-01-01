@@ -2,11 +2,9 @@ import path from "path";
 import fs from 'fs';
 import { EmojiAccepted } from "./../types/emojiTypes";
 import { rgbToHex } from "./../utils";
-import EmojiCore from "./EmojiCore";
+import { EmojiCore } from "./EmojiCore";
 
-const root = process.cwd();
-
-class Emoji extends EmojiCore {
+export class Emoji extends EmojiCore {
 
     /* A method that is being called in the constructor. */
     constructor (emoji?: EmojiAccepted) {
@@ -119,9 +117,7 @@ class Emoji extends EmojiCore {
         context.fillText(this._emoji, canvas.width / 2, canvas.height / 2);
 
         const buffer = canvas.toBuffer('image/png')
-        fs.writeFileSync(path.join(root, `0.png`), buffer)
+        fs.writeFileSync(path.join(__dirname, '..', '0.png'), buffer)
         return this;
     }
 }
-
-export default Emoji;
