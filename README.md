@@ -49,4 +49,4 @@ This code creates a new instance of the Emoji class with the "🧽" emoji as an 
 For example, the emojiData property contains all the data for the emoji, including its name, Unicode, and various color styles. The name() and unicode() methods return the name and Unicode of the emoji, respectively. The normalColor() method returns the base color style of the emoji, and its hexadecimal and rgb properties contain the color in hexadecimal and RGB formats, respectively.
 
 ## License
-Emoji Color Extractor is available under the Apache-2.0 License.
+Emoji Toolbox is available under the Apache-2.0 License.
