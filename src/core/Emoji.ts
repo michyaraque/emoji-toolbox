@@ -9,9 +9,13 @@ export class Emoji extends EmojiCore {
     /* A method that is being called in the constructor. */
     constructor (emoji?: EmojiAccepted) {
         super();
-        this._emoji = emoji;
-        this.parseEmoji();
-        this.createEmojiData();
+        
+        if(emoji) {
+            this._emoji = emoji;
+            this.parseEmoji();
+            this.createEmojiData();
+        }
+
         return this;
     }
 
