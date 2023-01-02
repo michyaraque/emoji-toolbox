@@ -1,27 +1,23 @@
-import {EMOJI_LIST} from './../constants';
+import { EMOJI_LIST } from './../constants';
 
 export class EmojiUtils {
 
-    protected getEmojiList() {
-        return EMOJI_LIST;
-    }
-    
-    protected getKeyByValue(object: any, value: string) {
-        return Object.keys(object).find(key => object[key] === value);
-    }
+  protected static getEmojiList() {
+    return EMOJI_LIST;
+  }
 
-    getEmojiNameByEmoji(emoji: string): string {
-        const emojis = this.getEmojiList();
-        return this.getKeyByValue(emojis, emoji)
-    }
+  protected static getKeyByValue(object: any, value: string) {
+    return Object.keys(object).find(key => object[key] === value);
+  }
 
-    emojiExistOnList(emoji: string): boolean {
-        const emojis = this.getEmojiList();
-        return Boolean(this.getKeyByValue(emojis, emoji))
-    }
+  protected static getEmojiNameByEmoji(emoji: string): string {
+    const emojis = this.getEmojiList();
+    return this.getKeyByValue(emojis, emoji)
+  }
 
-    protected checkIfEmojiExist = (emoji?: string) => {
-        return this.emojiExistOnList(emoji);
-    }
+  protected static checkIfEmojiExist = (emoji?: string) => {
+    const emojis = this.getEmojiList();
+    return Boolean(this.getKeyByValue(emojis, emoji))
+  }
 
 }
