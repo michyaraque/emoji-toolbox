@@ -30,3 +30,22 @@ export const canvasRGBAToRGB = (red: number, green: number, blue: number, totalP
     const b = Math.round(blue / totalPixels);
     return [r, g, b];
 }
+
+
+const hexToRgb = (hex: string) => {
+    const hexadecimal = hex.replace('#', '');
+    return hexadecimal.length === 3
+            ? hexadecimal.split('').map(c => parseInt(c.repeat(2), 16))
+            : hexadecimal.match(/.{1,2}/g).map(v => parseInt(v, 16))
+}
+
+export const isHexTooDark = (hexColor: string) => {
+    const [r, g, b] = hexToRgb(hexColor)
+    return (0.2126 * r + 0.7152 * g + 0.0722 * b) < 40
+       
+}
+
+export const isHexTooLight = (hexColor: string) => {
+    const [r, g, b] = hexToRgb(hexColor)
+    return (((r * 299) + (g * 587) + (b * 114)) / 1000) > 155
+}
