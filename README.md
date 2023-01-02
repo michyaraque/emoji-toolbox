@@ -13,35 +13,21 @@ yarn add emoji-toolbox
 ```
 Once you have it installed, you can use it in your code like this:
 
-#### ES6
+#### API
+
 ```js
-const Emoji = require('emoji-toolbox');
+import emoji from 'emoji-toolbox';
 
-const emojiSoftColor = new Emoji("✅").emojiData;
-```
+emoji.identifier("✅"); // Returns the identifier of the emoji: white_check_mark
+emoji.humanName("✅"); // Returns the identifier in human readable: White Check Mark
+emoji.unicode("✅"); // Unicode value: U+2705
+emoji.normalColor("✅", "rgb"); // Defaults return RGB value by default
+emoji.softColor("✅", "hex"); // Hexadecimal explit
+emoji.darkenColor("✅", "both"); // object of rgb and hex values
 
-#### Typescript
-```typescript
-import Emoji from 'emoji-toolbox';
+emoji.hasEmoji("Detect if this phrase contains a emoji 🧰"); // True
+emoji.demojify("Remove emoji from phrase 🗯️"); // Remove emoji from phrase
 
-const emoji = new Emoji("🧽");
-
-const emojiObject = emoji.emojiData; // All emoji data
-
-const emojiName = emoji.name();
-const emojiUnicode = emoji.unicode();
-
-// Normal color (The base)
-const colorHexN = emoji.normalColor().hexadecimal;
-const colorRGBN = emoji.normalColor().rgb;
-
-// The most darken color with -40% of brightness and saturation
-const colorHexS = emoji.softColor().hexadecimal;
-const colorRGBS = emoji.softColor().rgb;
-
-// The most darken color with +40% of brightness and saturation
-const colorHexD = emoji.darkenColor().hexadecimal;
-const colorRGBD = emoji.darkenColor().rgb;
 ```
 
 This code creates a new instance of the Emoji class with the "🧽" emoji as an argument. You can then access the various properties and methods of this instance to get different pieces of data about the emoji.
