@@ -1,3 +1,4 @@
+![](images/banner.jpg)
 # 🧰 Emoji Toolbox ~ 😁✅🎉
 Want to add a touch of color to your application or website with emojis? Emoji Toolbox is the tool you need! This library allows you to extract the **dominant color of any emoji** and use it as background color or any other purpose.
 
