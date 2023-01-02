@@ -117,7 +117,7 @@ export class EmojiCore extends EmojiUtils {
             this.totalPixels
         )
 
-        const soft = brightness(saturation([red, green, blue], 0.1), 1.5);
+        const soft = brightness(saturation([red, green, blue], 0.1), 0.99);
         const darken = brightness(saturation([red, green, blue], 0.9), 0.48);
         const baseColor = canvasRGBAToHex(r, g, b, this.totalPixels);
 
