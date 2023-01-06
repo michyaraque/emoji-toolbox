@@ -1,8 +1,5 @@
-import { Canvas, createCanvas, SKRSContext2D } from "@napi-rs/canvas";
-import { EmojiAccepted, TColor } from "../types/emojiTypes";
-import { canvasRGBAToHex, canvasRGBAToRGB, brightness, saturation, rgbToHex } from "../utils";
-import fs from 'fs';
-import path from 'path';
+import { EmojiAccepted, IEmojiColorCompose, TColor } from "../types/emojiTypes";
+import { canvasRGBAToRGB, rgbToHex } from "../utils";
 import { EmojiUtils } from "./EmojiUtils";
 
 export class EmojiCore extends EmojiUtils {
@@ -10,10 +7,6 @@ export class EmojiCore extends EmojiUtils {
   protected static baseColor: number[];
 
   protected static BASE_SIZE: number = 75;
-  protected static container: {
-    canvas: Canvas;
-    context: SKRSContext2D;
-  }
 
   /* protected static createStaticEmojiBase = async () => {
     const formatedEmojis = Object.values(this.getEmojiList());
@@ -36,7 +29,7 @@ export class EmojiCore extends EmojiUtils {
     ), content);
   } */
 
-  protected static createEmojiTypes = async () => {
+  /* protected static createEmojiTypes = async () => {
     try {
       const formatedEmojis = Object.values(this.getEmojiList());
       let content = 'export type EmojiAccepted = ' + formatedEmojis.map((item) => `"${item}"`).join(" | ");
@@ -50,7 +43,7 @@ export class EmojiCore extends EmojiUtils {
     } catch (error) {
       console.error(error);
     }
-  }
+  } */
 
   protected static getColorBaseOfEmoji = (emoji: EmojiAccepted): number[] => {
 
@@ -61,7 +54,8 @@ export class EmojiCore extends EmojiUtils {
       blue: 0,
       alpha: 0
     };
-    const canvas = createCanvas(this.BASE_SIZE, this.BASE_SIZE);
+
+    const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
 
     context.font = "30px Arial";
@@ -90,7 +84,7 @@ export class EmojiCore extends EmojiUtils {
     return [red, green, blue, totalPixels];
   }
 
-  protected static colorComposer(type: TColor = "rgb", rgb: number[]) {
+  protected static colorComposer(type: TColor = "rgb", rgb: number[]): IEmojiColorCompose {
     const [red, green, blue] = rgb;
     const hexColor = rgbToHex(red, green, blue);
 

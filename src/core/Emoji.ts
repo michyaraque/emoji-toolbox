@@ -1,9 +1,32 @@
-import { EmojiAccepted, TColor } from "./../types/emojiTypes";
+import { EmojiAccepted, IEmojiData, TColor } from "./../types/emojiTypes";
 import { brightness, saturation } from "./../utils";
 import { EmojiCore } from "./EmojiCore";
 import { EmojiUtils } from "./EmojiUtils";
 
-class Emoji extends EmojiCore {
+export class Emoji extends EmojiCore {
+
+  public static emojiData(emoji: EmojiAccepted): IEmojiData {
+
+    const [red, green, blue] = Emoji.pickColorBaseOfEmoji(emoji);
+    const normalColor = Emoji.normalColor(emoji, "both", [red, green, blue]);
+    const softColor = Emoji.softColor(emoji, "both", [red, green, blue]);
+    const darkenColor = Emoji.darkenColor(emoji, "both", [red, green, blue]);
+
+    return {
+      base: normalColor,
+      soft: softColor,
+      darken: darkenColor,
+    }
+  }
+
+  private static pickColorBaseOfEmoji(emoji: EmojiAccepted, rgb: number[] = undefined) {
+    let [red, green, blue] = [0, 0, 0];
+    if (rgb !== undefined) {
+      return [red, green, blue] = rgb;
+    }
+
+    return [red, green, blue] = EmojiCore.getColorBaseOfEmoji(emoji)
+  }
 
   /**
    * It returns the name of the emoji.
@@ -43,9 +66,9 @@ class Emoji extends EmojiCore {
    * @returns The normalColor() method returns the darken property of the styles object,
    *  access to the object "hexadecimal" or "rgb"
    */
-  public static normalColor(emoji: EmojiAccepted, type: TColor = "rgb") {
-    const rgb = EmojiCore.getColorBaseOfEmoji(emoji)
-    return Emoji.colorComposer(type, rgb);
+  public static normalColor(emoji: EmojiAccepted, type: TColor = "rgb", rgb: number[] = undefined) {
+    let [red, green, blue] = Emoji.pickColorBaseOfEmoji(emoji, rgb);
+    return Emoji.colorComposer(type, [red, green, blue]);
   }
 
   /**
@@ -55,8 +78,8 @@ class Emoji extends EmojiCore {
    * @returns The softColor() method returns the darken property of the styles object,
    *  access to the object "hexadecimal" or "rgb"
    */
-  public static softColor(emoji: EmojiAccepted, type: TColor = "rgb") {
-    const [red, green, blue] = EmojiCore.getColorBaseOfEmoji(emoji)
+  public static softColor(emoji: EmojiAccepted, type: TColor = "rgb", rgb: number[] = undefined) {
+    let [red, green, blue] = Emoji.pickColorBaseOfEmoji(emoji, rgb);
     const soft = brightness(saturation([red, green, blue], 0.1), 0.99);
     return Emoji.colorComposer(type, soft);
   }
@@ -68,8 +91,8 @@ class Emoji extends EmojiCore {
    * @returns The darkenColor() method returns the darken property of the styles object,
    *  access to the object "hexadecimal" or "rgb"
    */
-  public static darkenColor(emoji: EmojiAccepted, type: TColor = "rgb") {
-    const [red, green, blue] = EmojiCore.getColorBaseOfEmoji(emoji)
+  public static darkenColor(emoji: EmojiAccepted, type: TColor = "rgb", rgb: number[] = undefined) {
+    let [red, green, blue] = Emoji.pickColorBaseOfEmoji(emoji, rgb);
     const darken = brightness(saturation([red, green, blue], 0.9), 0.48);
     return Emoji.colorComposer(type, darken);
   }
@@ -118,5 +141,3 @@ class Emoji extends EmojiCore {
   }
 
 }
-
-export default Emoji;
