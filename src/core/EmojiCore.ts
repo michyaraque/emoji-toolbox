@@ -15,27 +15,6 @@ export class EmojiCore extends EmojiUtils {
     context: SKRSContext2D;
   }
 
-  /* protected static createStaticEmojiBase = async () => {
-    const formatedEmojis = Object.values(this.getEmojiList());
-    let content = 'export const STATIC_EMOJI_DATA = [ ';
-    formatedEmojis.map((item: EmojiAccepted, index) => {
-      this.parseEmoji(item);
-      const emojiData = EmojiCore.emojiData;
-
-      content += JSON.stringify(emojiData, null, 2).replace(/[\[\]']+/g, '') + ",";
-
-      this.emojiData = null;
-      if (index === 5) return;
-    })
-    content += '];';
-    await fs.promises.writeFile(path.join(
-      __dirname,
-      '..',
-      'constants',
-      'staticEmojiBase.ts'
-    ), content);
-  } */
-
   protected static createEmojiTypes = async () => {
     try {
       const formatedEmojis = Object.values(this.getEmojiList());

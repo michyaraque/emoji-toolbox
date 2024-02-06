@@ -24,7 +24,7 @@ describe("Emoji Toolbox - Package", () => {
     })
 
     it("Should be the exact unicode of the input emoji", async () => {
-      expect(emoji.unicode("☢️")).to.equal("2622-fe0f");
+      expect(emoji.unicode("☢️")).to.equal("U+2622-U+fe0f");
     })
 
   })
